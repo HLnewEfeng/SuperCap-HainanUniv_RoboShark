@@ -19,9 +19,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
-#include "fdcan.h"
 
 /* USER CODE BEGIN 0 */
+#include "fdcan.h"
 extern volatile uint8_t adc_ready_flag;
 
 extern int initialstart;//
@@ -33,7 +33,7 @@ extern float Vcap, Vbat;
 extern float Icap, Ibat;
 extern float Pbat,Pcap,Pref;
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim1;
@@ -279,6 +279,7 @@ int adc_offline_cnt=0;
 // int rst_cnt=5000;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+  
   if (htim->Instance == TIM1){//TIM1INT
     // if (pid_cnt!=1){
     //   pid_cnt++;
@@ -307,10 +308,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     PowerPIcnt+=1;
     if (PowerPIcnt==50){
       PowerPIcnt=0;
-      //Iaim = Pbat_Control(Pref,Pbat,Vcap);
+      Iaim = Pbat_Control(Pref,Pbat,Vcap);
     }
     Iaim=LIMIT(Iaim,Icap_min,Icap_max);
-    //Duty = Icap_Control(Iaim, Icap);
+    Duty = Icap_Control(Iaim, Icap);
     if(initialstart && capemerged){
       Duty =LIMIT(Duty,LIMIT((int)(400*Vcap/Vbat),D_min,D_max),D_max);
       if(Duty>((int)(400*Vcap/Vbat)+1))initialstart=0;

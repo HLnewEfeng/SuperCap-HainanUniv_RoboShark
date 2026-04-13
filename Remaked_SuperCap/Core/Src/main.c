@@ -176,6 +176,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,1);//注释掉后关闭了超电功能
+    capemerged=1;
+
+    if(initialstart && Duty && capemerged){
+      HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,1);
+      TIM1->BDTR |= TIM_BDTR_MOE;
+    }
+
+    CAN_ReceiveDataRefresh_Flag = 1;
+    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

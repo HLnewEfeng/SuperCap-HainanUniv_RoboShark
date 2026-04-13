@@ -37,7 +37,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN Private defines */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE END Private defines */
 
 void MX_TIM1_Init(void);

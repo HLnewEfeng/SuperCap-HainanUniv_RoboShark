@@ -66,7 +66,7 @@ void Error_Handler(void);
 #define Icap_CC -2 //-20
 #define Vcap_CC 7//缓启动阈值
 #define D_MIN_i 5
-#define D_MAX_i 389
+#define D_MAX_i 389//389
 #define D_min 5
 #define D_max 389
 #define Ibat_max 10 //10
